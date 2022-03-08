@@ -4,15 +4,19 @@
 An interface to the PaperCut XML web services API
 
 The server/examples/webservices/java/docs/api/ServerCommandProxy.html file
-should be copied and updated here when PaperCut is upgraded.
+should be copied here and updated when PaperCut is upgraded.
 
 'npm run scrape' makes papercut_api.json, docs.js from ServerCommandProxy.html
 
 'npm run docs' generates README.md based on index.js and docs.js
+(requires jsdoc2md to be installed globally (I should fix that))
 
 All methods of the PaperCut XML web services API are implemented dynamically
 based on ServerCommandProxy.html via papercut_api.json.  Minimal parameter
 validation is provided on these methods.
+
+In the case of overloaded methods (eg. adjustUserAccountBalance), only the
+first method is implemented.
 
 **Kind**: global class  
 
