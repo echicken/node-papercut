@@ -2,8 +2,33 @@
 
 This module makes it *slightly* easier to interact with the
 [PaperCut NG/MF XML Web Services API](https://www.papercut.com/support/resources/manuals/ng-mf/common/topics/tools-web-services.html)
-via your node.js application, and performs some minimal
-validation of parameters for your API calls.
+via your node.js application, and performs minimal validation of parameters
+for your API calls.
+
+## Using
+
+```js
+const PaperCut = require('node-papercut');
+const papercut = new PaperCut('my.server.address', 9192, 'my_auth_token');
+papercut.getTotalUsers().then(n => console.log(`There are ${n} users`));
+```
+
+I've found that the [online docs](https://www.papercut.com/support/resources/manuals/ng-mf/common/topics/tools-web-services.html)
+are often a bit outdated. The list of API methods below is more comprehensive
+and is based on the auto-generated **ServerCommandProxy** file included with
+**PaperCut NG/MF**. It's best to refer to this page for available methods.
+
+The web API includes several overloaded methods (eg. **adjustUserAccountBalance**
+which may take four or five parameters) that are tricky to handle dynamically.
+Subsequent/variant methods of the same name are assigned a numeric suffix in
+this module, so you'll end up with:
+
+```js
+papercut.adjustUserAccountBalance(username, adjustment, comment);
+papercut.adjustUserAccountBalance_2(username, adjustment, comment, accountName);
+```
+
+therefore, again, it's best to refer to this page to see available methods.
 
 ## Updating and Rebuilding
 
