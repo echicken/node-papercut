@@ -1,13 +1,14 @@
 # node-papercut
 
-This module makes it *slightly* easier to interact with the PaperCut XML
-Web Services API via your node.js application, and performs some minimal
+This module makes it *slightly* easier to interact with the
+[PaperCut NG/MF XML Web Services API](https://www.papercut.com/support/resources/manuals/ng-mf/common/topics/tools-web-services.html)
+via your node.js application, and performs some minimal
 validation of parameters for your API calls.
 
 ## Updating and Rebuilding
 
 This module takes the dubious approach of scraping the HTML documentation
-included with PaperCut NG/MF, then dynamically generating its own methods
+included with **PaperCut NG/MF**, then dynamically generating its own methods
 and docs based on the result. You can just start using this module without
 having to worry about any of that, but it's possible that this module's API
 will fall behind as new versions of PaperCut come out.
@@ -17,7 +18,7 @@ an arbitrary API method without having to rebuild this module's data.
 
 If you want to rebuild this module's list of methods, copy the file
 **server/examples/webservices/java/docs/api/ServerCommandProxy.html** from
-your PaperCut NG/MF application server into the root of this module and run
+your **PaperCut NG/MF** application server into the root of this module and run
 the following commands:
 
 ```sh
