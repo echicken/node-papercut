@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "scrape": "node ./scrape-api-docs.js",
-    "docs": "jsdoc2md index.js docs.js > README.md"
+    "docs": "jsdoc2md index.js docs.js | cat header.md - > README.md"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/echicken/papercut.git"
+    "url": "https://github.com/echicken/node-papercut.git"
   },
   "author": "Derek Mullin",
   "license": "MIT",
