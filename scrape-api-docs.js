@@ -29,53 +29,61 @@ function typeconv(v) {
 const html = fs.readFileSync('./ServerCommandProxy.html', 'utf8');
 const data = scrape.scrapeHTML(html, {
 	methods: {
-			listItem: 'tr',
-			data: {
-				return_type: {
-					selector: 'td.colFirst > code',
-					convert: typeconv,
+		listItem: 'tr',
+		data: {
+			return_type: {
+				selector: 'td.colFirst > code',
+				convert: typeconv,
+			},
+			name: {
+				selector: 'th.colSecond > code > span.memberNameLink > a',
+			},
+			parameters: {
+				selector: 'th.colSecond > code',
+				convert: v => {
+					const match = v.match(/\(((.*\n*)*?)\)/);
+					if (match !== null) {
+						const params = match[1].split(',').map(e => {
+							const s = e.trim().split(/\s/);
+							const ret = { name : s[1] };
+							ret.type = typeconv(s[0]);
+							return ret;
+						});
+						return params;
+					}
 				},
-				name: {
-					selector: 'th.colSecond > code > span.memberNameLink > a',
-				},
-				parameters: {
-					selector: 'th.colSecond > code',
-					convert: v => {
-						const match = v.match(/\(((.*\n*)*?)\)/);
-						if (match !== null) {
-							const params = match[1].split(',').map(e => {
-								const s = e.trim().split(/\s/);
-								const ret = { name : s[1] };
-								ret.type = typeconv(s[0]);
-								return ret;
-							});
-							return params;
-						}
-					},
-				},
-				description: {
-					selector: 'td.colLast > div.block',
-				},
-			}
-	}
+			},
+			description: {
+				selector: 'td.colLast > div.block',
+			},
+		},
+	},
 });
 
-const methods = data.methods.filter(e => e.return_type != '' && e.name != '' && typeof e.parameters != 'undefined');
+const methodNames = [];
+const methods = data.methods.filter(
+	e => e.return_type !== '' && e.name !== '' && e.parameters !== undefined
+).map(e => {
+	let v = 2;
+	let mn = e.name;
+	while (methodNames.indexOf(mn) > -1) {
+		mn = `${e.name}${v++}`;
+	}
+	methodNames.push(mn);
+	e.jsName = mn;
+	return e;
+});
 
 fs.writeFileSync('./papercut_api.json', JSON.stringify(methods));
 
 const fn = './docs.js';
-try {
-	fs.truncateSync(fn);
-} catch (err) {
-	console.error(err, '(You can probably ignore this.)');
-}
+if (fs.existsSync(fn)) fs.truncateSync(fn);
 
 methods.forEach(e => {
 	const dox = [
 		'/**',
 		` * ${e.description}`,
-		` * @function ${e.name}`,
+		` * @function ${e.jsName}`,
 		' * @memberof PaperCut',
 		' * @instance',
 		` * @return {Promise} Resolves with ${e.return_type}, rejects on error`,

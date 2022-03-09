@@ -6,21 +6,6 @@ const api_spec = JSON.parse(fs.readFileSync(__dirname + '/papercut_api.json', 'u
 
 /**
  * An interface to the PaperCut XML web services API
- *
- * The server/examples/webservices/java/docs/api/ServerCommandProxy.html file
- * should be copied here and updated when PaperCut is upgraded.
- *
- * 'npm run scrape' makes papercut_api.json, docs.js from ServerCommandProxy.html
- *
- * 'npm run docs' generates README.md based on index.js and docs.js
- * (requires jsdoc2md to be installed globally (I should fix that))
- *
- * All methods of the PaperCut XML web services API are implemented dynamically
- * based on ServerCommandProxy.html via papercut_api.json.  Minimal parameter
- * validation is provided on these methods.
- * 
- * In the case of overloaded methods (eg. adjustUserAccountBalance), only the
- * first method is implemented.
  */
 class PaperCut {
 
@@ -57,9 +42,9 @@ class PaperCut {
 
 api_spec.forEach(method => {
 
-	if (PaperCut.prototype[method.name] !== undefined) return;
+	if (PaperCut.prototype[method.jsName] !== undefined) return;
 
-	PaperCut.prototype[method.name] = function (...params) {
+	PaperCut.prototype[method.jsName] = function (...params) {
     	method.parameters.forEach((e, i) => {
 			if (params[i] === undefined) throw `Parameter ${e.name} ${e.type} missing`;
 			switch (e.type) {
