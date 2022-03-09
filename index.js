@@ -63,7 +63,7 @@ api_spec.forEach(method => {
 					break;
 			}
 		});
-    	return this.call_api(method.name, params);
+		return this.call_api(method.name, params);
 	}
 });
 
