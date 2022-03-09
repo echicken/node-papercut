@@ -42,11 +42,8 @@ class PaperCut {
 }
 
 api_spec.forEach(method => {
-
-	if (PaperCut.prototype[method.jsName] !== undefined) return;
-
 	PaperCut.prototype[method.jsName] = function (...params) {
-    	method.parameters.forEach((e, i) => {
+		method.parameters.forEach((e, i) => {
 			if (params[i] === undefined) throw `Parameter ${e.name} ${e.type} missing`;
 			switch (e.type) {
 				case 'array':
@@ -65,10 +62,9 @@ api_spec.forEach(method => {
 					if (typeof params[i] != e.type) throw `${e.name} must be ${e.type}`;
 					break;
 			}
-	    });
+		});
     	return this.call_api(method.name, params);
 	}
-
 });
 
 module.exports = PaperCut;
