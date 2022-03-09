@@ -1,4 +1,4 @@
-# PaperCut
+# node-papercut
 
 This module makes it *slightly* easier to interact with the PaperCut XML
 Web Services API via your node.js application, and performs some minimal
