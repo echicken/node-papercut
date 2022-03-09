@@ -7,11 +7,10 @@ validation of parameters for your API calls.
 
 ## Updating and Rebuilding
 
-This module takes the dubious approach of scraping the HTML documentation
-included with **PaperCut NG/MF**, then dynamically generating its own methods
-and docs based on the result. You can just start using this module without
-having to worry about any of that, but it's possible that this module's API
-will fall behind as new versions of PaperCut come out.
+This module takes the dubious approach of scraping the HTML docs included with
+**PaperCut NG/MF**, then dynamically generating its own methods and docs based
+on the result. You can use this module without worrying about that, but this
+module may fall behind as new versions of PaperCut come out.
 
 As a shortcut, you can use **PaperCut.call_api(method, param[, ...])** to call
 an arbitrary API method without having to rebuild this module's data.
@@ -35,10 +34,11 @@ Typically when this happens, the generated docs will show no methods.
 
 I'd recommend working on a new branch in your own fork of the repo before
 running the above commands or making changes. If your update is successful
-and brings this module up to date with the latest version of PaperCut MF,
-a pull request would then be welcome. (If you're using PaperCut NG, remind
-me to verify that I won't lose any MF-specific features by merging your
-branch.)
+and brings this module up to date with the latest version of **PaperCut MF**,
+a pull request would then be welcome. (If you're using **PaperCut NG**, remind
+me to verify that I won't lose any **MF** features by merging your branch. I
+haven't checked whether the same **ServerCommandProxy.html** file ships with
+both versions.)
 <a name="PaperCut"></a>
 
 ## PaperCut

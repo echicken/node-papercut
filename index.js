@@ -1,8 +1,9 @@
 'use strict';
 const fs = require('fs');
+const path = require('path');
 const xmlrpc = require('xmlrpc');
 
-const api_spec = JSON.parse(fs.readFileSync(__dirname + '/papercut_api.json', 'utf8'));
+const api_spec = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'papercut-api.json'), 'utf8'));
 
 /**
  * An interface to the PaperCut XML web services API

@@ -4,8 +4,8 @@
   "description": "An interface to the PaperCut XML web services API.",
   "main": "index.js",
   "scripts": {
-    "scrape": "node ./scrape-api-docs.js",
-    "docs": "node ./generate-docs.js"
+    "scrape": "node ./build/scrape-api-docs.js",
+    "docs": "node ./build/generate-docs.js"
   },
   "repository": {
     "type": "git",
