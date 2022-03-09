@@ -1,5 +1,5 @@
 {
-  "name": "papercut",
+  "name": "node-papercut",
   "version": "1.0.0",
   "description": "An interface to the PaperCut XML web services API.",
   "main": "index.js",
