@@ -67,7 +67,7 @@ const methods = data.methods.filter(
 	let v = 2;
 	let mn = e.name;
 	while (methodNames.indexOf(mn) > -1) {
-		mn = `${e.name}${v++}`;
+		mn = `${e.name}_${v++}`;
 	}
 	methodNames.push(mn);
 	e.jsName = mn;
