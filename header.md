@@ -1,3 +1,11 @@
+# PaperCut
+
+This module makes it *slightly* easier to interact with the PaperCut XML
+Web Services API via your node.js application, and performs some minimal
+validation of parameters for your API calls.
+
+## Updating and Rebuilding
+
 This module takes the dubious approach of scraping the HTML documentation
 included with PaperCut NG/MF, then dynamically generating its own methods
 and docs based on the result. You can just start using this module without
