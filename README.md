@@ -1,22 +1,39 @@
+This module takes the dubious approach of scraping the HTML documentation
+included with PaperCut NG/MF, then dynamically generating its own methods
+and docs based on the result. You can just start using this module without
+having to worry about any of that, but it's possible that this module's API
+will fall behind as new versions of PaperCut come out.
+
+As a shortcut, you can use **PaperCut.call_api(method, param[, ...])** to call
+an arbitrary API method without having to rebuild this module's data.
+
+If you want to rebuild this module's list of methods, copy the file
+**server/examples/webservices/java/docs/api/ServerCommandProxy.html** from
+your PaperCut NG/MF application server into the root of this module and run
+the following commands:
+
+```sh
+npm run scrape
+```
+
+```sh
+npm run docs
+```
+
+Occasionally, the format of **ServerCommandProxy.html** will change, and
+alterations will need to be made to **scrape-api-docs.js** to accommodate.
+Typically when this happens, the generated docs will show no methods.
+
+I'd recommend working on a new branch in your own fork of the repo before
+running the above commands or making changes. If your update is successful
+and brings this module up to date with the latest version of PaperCut MF,
+a pull request would then be welcome. (If you're using PaperCut NG, remind
+me to verify that I won't lose any MF-specific features by merging your
+branch.)
 <a name="PaperCut"></a>
 
 ## PaperCut
 An interface to the PaperCut XML web services API
-
-The server/examples/webservices/java/docs/api/ServerCommandProxy.html file
-should be copied here and updated when PaperCut is upgraded.
-
-'npm run scrape' makes papercut_api.json, docs.js from ServerCommandProxy.html
-
-'npm run docs' generates README.md based on index.js and docs.js
-(requires jsdoc2md to be installed globally (I should fix that))
-
-All methods of the PaperCut XML web services API are implemented dynamically
-based on ServerCommandProxy.html via papercut_api.json.  Minimal parameter
-validation is provided on these methods.
-
-In the case of overloaded methods (eg. adjustUserAccountBalance), only the
-first method is implemented.
 
 **Kind**: global class  
 
@@ -37,17 +54,17 @@ first method is implemented.
     * [.addUserToGroup(userName, groupName)](#PaperCut+addUserToGroup) ⇒ <code>Promise</code>
     * [.adjustSharedAccountAccountBalance(accountName, adjustment, comment)](#PaperCut+adjustSharedAccountAccountBalance) ⇒ <code>Promise</code>
     * [.adjustUserAccountBalance(username, adjustment, comment)](#PaperCut+adjustUserAccountBalance) ⇒ <code>Promise</code>
-    * [.adjustUserAccountBalance(username, adjustment, comment, accountName)](#PaperCut+adjustUserAccountBalance) ⇒ <code>Promise</code>
+    * [.adjustUserAccountBalance2(username, adjustment, comment, accountName)](#PaperCut+adjustUserAccountBalance2) ⇒ <code>Promise</code>
     * [.adjustUserAccountBalanceByCardNumber(cardNumber, adjustment, comment)](#PaperCut+adjustUserAccountBalanceByCardNumber) ⇒ <code>Promise</code>
-    * [.adjustUserAccountBalanceByCardNumber(cardNumber, adjustment, comment, accountName)](#PaperCut+adjustUserAccountBalanceByCardNumber) ⇒ <code>Promise</code>
+    * [.adjustUserAccountBalanceByCardNumber2(cardNumber, adjustment, comment, accountName)](#PaperCut+adjustUserAccountBalanceByCardNumber2) ⇒ <code>Promise</code>
     * [.adjustUserAccountBalanceByGroup(group, adjustment, comment)](#PaperCut+adjustUserAccountBalanceByGroup) ⇒ <code>Promise</code>
-    * [.adjustUserAccountBalanceByGroup(group, adjustment, comment, accountName)](#PaperCut+adjustUserAccountBalanceByGroup) ⇒ <code>Promise</code>
+    * [.adjustUserAccountBalanceByGroup2(group, adjustment, comment, accountName)](#PaperCut+adjustUserAccountBalanceByGroup2) ⇒ <code>Promise</code>
     * [.adjustUserAccountBalanceByGroupUpTo(group, adjustment, limit, comment)](#PaperCut+adjustUserAccountBalanceByGroupUpTo) ⇒ <code>Promise</code>
-    * [.adjustUserAccountBalanceByGroupUpTo(group, adjustment, limit, comment, accountName)](#PaperCut+adjustUserAccountBalanceByGroupUpTo) ⇒ <code>Promise</code>
+    * [.adjustUserAccountBalanceByGroupUpTo2(group, adjustment, limit, comment, accountName)](#PaperCut+adjustUserAccountBalanceByGroupUpTo2) ⇒ <code>Promise</code>
     * [.adjustUserAccountBalanceIfAvailable(username, adjustment, comment)](#PaperCut+adjustUserAccountBalanceIfAvailable) ⇒ <code>Promise</code>
-    * [.adjustUserAccountBalanceIfAvailable(username, adjustment, comment, accountName)](#PaperCut+adjustUserAccountBalanceIfAvailable) ⇒ <code>Promise</code>
+    * [.adjustUserAccountBalanceIfAvailable2(username, adjustment, comment, accountName)](#PaperCut+adjustUserAccountBalanceIfAvailable2) ⇒ <code>Promise</code>
     * [.adjustUserAccountBalanceIfAvailableLeaveRemaining(username, adjustment, leaveRemaining, comment)](#PaperCut+adjustUserAccountBalanceIfAvailableLeaveRemaining) ⇒ <code>Promise</code>
-    * [.adjustUserAccountBalanceIfAvailableLeaveRemaining(username, adjustment, leaveRemaining, comment, accountName)](#PaperCut+adjustUserAccountBalanceIfAvailableLeaveRemaining) ⇒ <code>Promise</code>
+    * [.adjustUserAccountBalanceIfAvailableLeaveRemaining2(username, adjustment, leaveRemaining, comment, accountName)](#PaperCut+adjustUserAccountBalanceIfAvailableLeaveRemaining2) ⇒ <code>Promise</code>
     * [.applyDeviceSettings(deviceName)](#PaperCut+applyDeviceSettings) ⇒ <code>Promise</code>
     * [.batchImportInternalUsers(importFile, overwriteExistingPasswords, overwriteExistingPINs)](#PaperCut+batchImportInternalUsers) ⇒ <code>Promise</code>
     * [.batchImportPrinters(importFile)](#PaperCut+batchImportPrinters) ⇒ <code>Promise</code>
@@ -59,7 +76,7 @@ first method is implemented.
     * [.createUserClientAccountsFile()](#PaperCut+createUserClientAccountsFile) ⇒ <code>Promise</code>
     * [.deleteExistingSharedAccount(sharedAccountName)](#PaperCut+deleteExistingSharedAccount) ⇒ <code>Promise</code>
     * [.deleteExistingUser(username)](#PaperCut+deleteExistingUser) ⇒ <code>Promise</code>
-    * [.deleteExistingUser(username, redactUserData)](#PaperCut+deleteExistingUser) ⇒ <code>Promise</code>
+    * [.deleteExistingUser2(username, redactUserData)](#PaperCut+deleteExistingUser2) ⇒ <code>Promise</code>
     * [.deletePrinter(serverName, printerName)](#PaperCut+deletePrinter) ⇒ <code>Promise</code>
     * [.disableDeviceSnmpv3(deviceName)](#PaperCut+disableDeviceSnmpv3) ⇒ <code>Promise</code>
     * [.disablePrinter(serverName, printerName, disableMins)](#PaperCut+disablePrinter) ⇒ <code>Promise</code>
@@ -87,7 +104,7 @@ first method is implemented.
     * [.getTaskStatus()](#PaperCut+getTaskStatus) ⇒ <code>Promise</code>
     * [.getTotalUsers()](#PaperCut+getTotalUsers) ⇒ <code>Promise</code>
     * [.getUserAccountBalance(username)](#PaperCut+getUserAccountBalance) ⇒ <code>Promise</code>
-    * [.getUserAccountBalance(username, accountName)](#PaperCut+getUserAccountBalance) ⇒ <code>Promise</code>
+    * [.getUserAccountBalance2(username, accountName)](#PaperCut+getUserAccountBalance2) ⇒ <code>Promise</code>
     * [.getUserGroups(userName)](#PaperCut+getUserGroups) ⇒ <code>Promise</code>
     * [.getUserOverdraftMode(username)](#PaperCut+getUserOverdraftMode) ⇒ <code>Promise</code>
     * [.getUserProperties(userName, propertyNames)](#PaperCut+getUserProperties) ⇒ <code>Promise</code>
@@ -101,7 +118,7 @@ first method is implemented.
     * [.listUserAccounts(offset, limit)](#PaperCut+listUserAccounts) ⇒ <code>Promise</code>
     * [.listUserGroups(offset, limit)](#PaperCut+listUserGroups) ⇒ <code>Promise</code>
     * [.listUserSharedAccounts(userName, offset, limit)](#PaperCut+listUserSharedAccounts) ⇒ <code>Promise</code>
-    * [.listUserSharedAccounts(userName, offset, limit, ignoreAccountMode)](#PaperCut+listUserSharedAccounts) ⇒ <code>Promise</code>
+    * [.listUserSharedAccounts2(userName, offset, limit, ignoreAccountMode)](#PaperCut+listUserSharedAccounts2) ⇒ <code>Promise</code>
     * [.lookUpUserNameByCardNo(cardNo)](#PaperCut+lookUpUserNameByCardNo) ⇒ <code>Promise</code>
     * [.lookUpUserNameByEmail(email)](#PaperCut+lookUpUserNameByEmail) ⇒ <code>Promise</code>
     * [.lookUpUserNameByIDNo(idNo)](#PaperCut+lookUpUserNameByIDNo) ⇒ <code>Promise</code>
@@ -138,9 +155,9 @@ first method is implemented.
     * [.setSharedAccountProperties(sharedAccountName, propertyNamesAndValues)](#PaperCut+setSharedAccountProperties) ⇒ <code>Promise</code>
     * [.setSharedAccountProperty(sharedAccountName, propertyName, propertyValue)](#PaperCut+setSharedAccountProperty) ⇒ <code>Promise</code>
     * [.setUserAccountBalance(username, balance, comment)](#PaperCut+setUserAccountBalance) ⇒ <code>Promise</code>
-    * [.setUserAccountBalance(username, balance, comment, accountName)](#PaperCut+setUserAccountBalance) ⇒ <code>Promise</code>
+    * [.setUserAccountBalance2(username, balance, comment, accountName)](#PaperCut+setUserAccountBalance2) ⇒ <code>Promise</code>
     * [.setUserAccountBalanceByGroup(group, balance, comment)](#PaperCut+setUserAccountBalanceByGroup) ⇒ <code>Promise</code>
-    * [.setUserAccountBalanceByGroup(group, balance, comment, accountName)](#PaperCut+setUserAccountBalanceByGroup) ⇒ <code>Promise</code>
+    * [.setUserAccountBalanceByGroup2(group, balance, comment, accountName)](#PaperCut+setUserAccountBalanceByGroup2) ⇒ <code>Promise</code>
     * [.setUserAccountSelectionAdvancedPopup(username, allowPersonal, chargeToPersonalWhenSharedSelected, defaultSharedAccount)](#PaperCut+setUserAccountSelectionAdvancedPopup) ⇒ <code>Promise</code>
     * [.setUserAccountSelectionAutoChargePersonal(username, withPopupConfirmation)](#PaperCut+setUserAccountSelectionAutoChargePersonal) ⇒ <code>Promise</code>
     * [.setUserAccountSelectionAutoSelectSharedAccount(username, accountName, chargeToPersonal)](#PaperCut+setUserAccountSelectionAutoSelectSharedAccount) ⇒ <code>Promise</code>
@@ -358,9 +375,9 @@ Adjust a user's built-in/default account balance by an adjustment amount.
 | adjustment | <code>double</code> | 
 | comment | <code>string</code> | 
 
-<a name="PaperCut+adjustUserAccountBalance"></a>
+<a name="PaperCut+adjustUserAccountBalance2"></a>
 
-### paperCut.adjustUserAccountBalance(username, adjustment, comment, accountName) ⇒ <code>Promise</code>
+### paperCut.adjustUserAccountBalance2(username, adjustment, comment, accountName) ⇒ <code>Promise</code>
 Adjust a user's account balance by an adjustment amount.
 
 **Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
@@ -387,9 +404,9 @@ Adjust a user's account balance.
 | adjustment | <code>double</code> | 
 | comment | <code>string</code> | 
 
-<a name="PaperCut+adjustUserAccountBalanceByCardNumber"></a>
+<a name="PaperCut+adjustUserAccountBalanceByCardNumber2"></a>
 
-### paperCut.adjustUserAccountBalanceByCardNumber(cardNumber, adjustment, comment, accountName) ⇒ <code>Promise</code>
+### paperCut.adjustUserAccountBalanceByCardNumber2(cardNumber, adjustment, comment, accountName) ⇒ <code>Promise</code>
 Adjust a user's account balance.
 
 **Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
@@ -416,9 +433,9 @@ Adjust the account balance of all users in a group by an adjustment amount.
 | adjustment | <code>double</code> | 
 | comment | <code>string</code> | 
 
-<a name="PaperCut+adjustUserAccountBalanceByGroup"></a>
+<a name="PaperCut+adjustUserAccountBalanceByGroup2"></a>
 
-### paperCut.adjustUserAccountBalanceByGroup(group, adjustment, comment, accountName) ⇒ <code>Promise</code>
+### paperCut.adjustUserAccountBalanceByGroup2(group, adjustment, comment, accountName) ⇒ <code>Promise</code>
 Adjust the account balance of all users in a group by an adjustment amount.
 
 **Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
@@ -446,9 +463,9 @@ Adjust the account balance of all users in a group by an adjustment amount.
 | limit | <code>double</code> | 
 | comment | <code>string</code> | 
 
-<a name="PaperCut+adjustUserAccountBalanceByGroupUpTo"></a>
+<a name="PaperCut+adjustUserAccountBalanceByGroupUpTo2"></a>
 
-### paperCut.adjustUserAccountBalanceByGroupUpTo(group, adjustment, limit, comment, accountName) ⇒ <code>Promise</code>
+### paperCut.adjustUserAccountBalanceByGroupUpTo2(group, adjustment, limit, comment, accountName) ⇒ <code>Promise</code>
 Adjust the account balance of all users in a group by an adjustment amount.
 
 **Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
@@ -476,9 +493,9 @@ Adjust a user's account balance by an adjustment amount (if there is credit avai
 | adjustment | <code>double</code> | 
 | comment | <code>string</code> | 
 
-<a name="PaperCut+adjustUserAccountBalanceIfAvailable"></a>
+<a name="PaperCut+adjustUserAccountBalanceIfAvailable2"></a>
 
-### paperCut.adjustUserAccountBalanceIfAvailable(username, adjustment, comment, accountName) ⇒ <code>Promise</code>
+### paperCut.adjustUserAccountBalanceIfAvailable2(username, adjustment, comment, accountName) ⇒ <code>Promise</code>
 Adjust a user's account balance by an adjustment amount (if there is credit available).
 
 **Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
@@ -507,9 +524,9 @@ Adjust a user's account balance by an adjustment amount (if there is credit avai
 | leaveRemaining | <code>double</code> | 
 | comment | <code>string</code> | 
 
-<a name="PaperCut+adjustUserAccountBalanceIfAvailableLeaveRemaining"></a>
+<a name="PaperCut+adjustUserAccountBalanceIfAvailableLeaveRemaining2"></a>
 
-### paperCut.adjustUserAccountBalanceIfAvailableLeaveRemaining(username, adjustment, leaveRemaining, comment, accountName) ⇒ <code>Promise</code>
+### paperCut.adjustUserAccountBalanceIfAvailableLeaveRemaining2(username, adjustment, leaveRemaining, comment, accountName) ⇒ <code>Promise</code>
 Adjust a user's account balance by an adjustment amount (if there is credit available to leave the specified
  amount still available in the account).
 
@@ -660,9 +677,9 @@ Delete/remove an existing user from the user list.
 | --- | --- |
 | username | <code>string</code> | 
 
-<a name="PaperCut+deleteExistingUser"></a>
+<a name="PaperCut+deleteExistingUser2"></a>
 
-### paperCut.deleteExistingUser(username, redactUserData) ⇒ <code>Promise</code>
+### paperCut.deleteExistingUser2(username, redactUserData) ⇒ <code>Promise</code>
 Delete/remove an existing user from the user list.
 
 **Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
@@ -1026,9 +1043,9 @@ The a user's current account balance.
 | --- | --- |
 | username | <code>string</code> | 
 
-<a name="PaperCut+getUserAccountBalance"></a>
+<a name="PaperCut+getUserAccountBalance2"></a>
 
-### paperCut.getUserAccountBalance(username, accountName) ⇒ <code>Promise</code>
+### paperCut.getUserAccountBalance2(username, accountName) ⇒ <code>Promise</code>
 The a user's current account balance.
 
 **Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
@@ -1204,9 +1221,9 @@ List all shared accounts (sorted by account name) that the user has access to, s
 | offset | <code>int</code> | 
 | limit | <code>int</code> | 
 
-<a name="PaperCut+listUserSharedAccounts"></a>
+<a name="PaperCut+listUserSharedAccounts2"></a>
 
-### paperCut.listUserSharedAccounts(userName, offset, limit, ignoreAccountMode) ⇒ <code>Promise</code>
+### paperCut.listUserSharedAccounts2(userName, offset, limit, ignoreAccountMode) ⇒ <code>Promise</code>
 List all shared accounts (sorted by account name) that the user has access to, starting at offset
  and listing only limit accounts.
 
@@ -1580,261 +1597,4 @@ Set multiple printer properties at once (to save multiple calls).
 **Returns**: <code>Promise</code> - Resolves with boolean, rejects on error  
 
 | Param | Type |
-| --- | --- |
-| authToken | <code>string</code> | 
-| serverName | <code>string</code> | 
-| printerName | <code>string</code> | 
-| propertyNamesAndValues | <code>array</code> | 
-
-<a name="PaperCut+setPrinterProperty"></a>
-
-### paperCut.setPrinterProperty(serverName, printerName, propertyName, propertyValue) ⇒ <code>Promise</code>
-Sets a printer property.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| serverName | <code>string</code> | 
-| printerName | <code>string</code> | 
-| propertyName | <code>string</code> | 
-| propertyValue | <code>string</code> | 
-
-<a name="PaperCut+setSharedAccountAccountBalance"></a>
-
-### paperCut.setSharedAccountAccountBalance(accountName, balance, comment) ⇒ <code>Promise</code>
-Set the balance on a shared account to a set value.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| accountName | <code>string</code> | 
-| balance | <code>double</code> | 
-| comment | <code>string</code> | 
-
-<a name="PaperCut+setSharedAccountOverdraftMode"></a>
-
-### paperCut.setSharedAccountOverdraftMode(accountName, mode) ⇒ <code>Promise</code>
-Set the shared account's overdraft mode
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| accountName | <code>string</code> | 
-| mode | <code>string</code> | 
-
-<a name="PaperCut+setSharedAccountProperties"></a>
-
-### paperCut.setSharedAccountProperties(sharedAccountName, propertyNamesAndValues) ⇒ <code>Promise</code>
-Set multiple shared account properties at once (to save multiple calls).
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| sharedAccountName | <code>string</code> | 
-| propertyNamesAndValues | <code>array</code> | 
-
-<a name="PaperCut+setSharedAccountProperty"></a>
-
-### paperCut.setSharedAccountProperty(sharedAccountName, propertyName, propertyValue) ⇒ <code>Promise</code>
-Sets a shared account property.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| sharedAccountName | <code>string</code> | 
-| propertyName | <code>string</code> | 
-| propertyValue | <code>string</code> | 
-
-<a name="PaperCut+setUserAccountBalance"></a>
-
-### paperCut.setUserAccountBalance(username, balance, comment) ⇒ <code>Promise</code>
-Set the balance on a user's account to a set value.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| username | <code>string</code> | 
-| balance | <code>double</code> | 
-| comment | <code>string</code> | 
-
-<a name="PaperCut+setUserAccountBalance"></a>
-
-### paperCut.setUserAccountBalance(username, balance, comment, accountName) ⇒ <code>Promise</code>
-Set the balance on a user's account to a set value.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| username | <code>string</code> | 
-| balance | <code>double</code> | 
-| comment | <code>string</code> | 
-| accountName | <code>string</code> | 
-
-<a name="PaperCut+setUserAccountBalanceByGroup"></a>
-
-### paperCut.setUserAccountBalanceByGroup(group, balance, comment) ⇒ <code>Promise</code>
-Set the balance for each member of a group to the given value.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| group | <code>string</code> | 
-| balance | <code>double</code> | 
-| comment | <code>string</code> | 
-
-<a name="PaperCut+setUserAccountBalanceByGroup"></a>
-
-### paperCut.setUserAccountBalanceByGroup(group, balance, comment, accountName) ⇒ <code>Promise</code>
-Set the balance for each member of a group to the given value.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| group | <code>string</code> | 
-| balance | <code>double</code> | 
-| comment | <code>string</code> | 
-| accountName | <code>string</code> | 
-
-<a name="PaperCut+setUserAccountSelectionAdvancedPopup"></a>
-
-### paperCut.setUserAccountSelectionAdvancedPopup(username, allowPersonal, chargeToPersonalWhenSharedSelected, defaultSharedAccount) ⇒ <code>Promise</code>
-Change a user's account selection setting to use the advanced account selection pop-up.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| username | <code>string</code> | 
-| allowPersonal | <code>boolean</code> | 
-| chargeToPersonalWhenSharedSelected | <code>boolean</code> | 
-| defaultSharedAccount | <code>string</code> | 
-
-<a name="PaperCut+setUserAccountSelectionAutoChargePersonal"></a>
-
-### paperCut.setUserAccountSelectionAutoChargePersonal(username, withPopupConfirmation) ⇒ <code>Promise</code>
-Sets the user to auto charge to it's personal account.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| username | <code>string</code> | 
-| withPopupConfirmation | <code>boolean</code> | 
-
-<a name="PaperCut+setUserAccountSelectionAutoSelectSharedAccount"></a>
-
-### paperCut.setUserAccountSelectionAutoSelectSharedAccount(username, accountName, chargeToPersonal) ⇒ <code>Promise</code>
-Change a user's account selection setting to automatically charge to a single shared account.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| username | <code>string</code> | 
-| accountName | <code>string</code> | 
-| chargeToPersonal | <code>boolean</code> | 
-
-<a name="PaperCut+setUserAccountSelectionStandardPopup"></a>
-
-### paperCut.setUserAccountSelectionStandardPopup(username, allowPersonal, allowListSelection, allowPinCode, allowPrintingAsOtherUser, chargeToPersonalWhenSharedSelected, defaultSharedAccount) ⇒ <code>Promise</code>
-Change a user's account selection setting to use the standard account selection pop-up.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| username | <code>string</code> | 
-| allowPersonal | <code>boolean</code> | 
-| allowListSelection | <code>boolean</code> | 
-| allowPinCode | <code>boolean</code> | 
-| allowPrintingAsOtherUser | <code>boolean</code> | 
-| chargeToPersonalWhenSharedSelected | <code>boolean</code> | 
-| defaultSharedAccount | <code>string</code> | 
-
-<a name="PaperCut+setUserOverdraftMode"></a>
-
-### paperCut.setUserOverdraftMode(username, mode) ⇒ <code>Promise</code>
-Set the user's overdraft mode
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| username | <code>string</code> | 
-| mode | <code>string</code> | 
-
-<a name="PaperCut+setUserProperties"></a>
-
-### paperCut.setUserProperties(userName, propertyNamesAndValues) ⇒ <code>Promise</code>
-Set multiple user properties at once (to save multiple calls).
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| userName | <code>string</code> | 
-| propertyNamesAndValues | <code>array</code> | 
-
-<a name="PaperCut+setUserProperty"></a>
-
-### paperCut.setUserProperty(userName, propertyName, propertyValue) ⇒ <code>Promise</code>
-Sets a user property.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| userName | <code>string</code> | 
-| propertyName | <code>string</code> | 
-| propertyValue | <code>string</code> | 
-
-<a name="PaperCut+syncGroup"></a>
-
-### paperCut.syncGroup(groupName) ⇒ <code>Promise</code>
-Syncs an existing group with the configured directory server, updates the group membership.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with boolean, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| groupName | <code>string</code> | 
-
-<a name="PaperCut+useCard"></a>
-
-### paperCut.useCard(userName, cardNumber) ⇒ <code>Promise</code>
-Add the value of the a card to a user's account.
-
-**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with string, rejects on error  
-
-| Param | Type |
-| --- | --- |
-| userName | <code>string</code> | 
-| cardNumber | <code>string</code> | 
-
+| --
