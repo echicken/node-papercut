@@ -1594,4 +1594,264 @@ Set the printer groups a printer belongs to, overwriting any existing group.
 Set multiple printer properties at once (to save multiple calls).
 
 **Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
-**Returns**: <code>Promise</code> - Resolves with b
+**Returns**: <code>Promise</code> - Resolves with boolean, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| authToken | <code>string</code> | 
+| serverName | <code>string</code> | 
+| printerName | <code>string</code> | 
+| propertyNamesAndValues | <code>array</code> | 
+
+<a name="PaperCut+setPrinterProperty"></a>
+
+### paperCut.setPrinterProperty(serverName, printerName, propertyName, propertyValue) ⇒ <code>Promise</code>
+Sets a printer property.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| serverName | <code>string</code> | 
+| printerName | <code>string</code> | 
+| propertyName | <code>string</code> | 
+| propertyValue | <code>string</code> | 
+
+<a name="PaperCut+setSharedAccountAccountBalance"></a>
+
+### paperCut.setSharedAccountAccountBalance(accountName, balance, comment) ⇒ <code>Promise</code>
+Set the balance on a shared account to a set value.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| accountName | <code>string</code> | 
+| balance | <code>double</code> | 
+| comment | <code>string</code> | 
+
+<a name="PaperCut+setSharedAccountOverdraftMode"></a>
+
+### paperCut.setSharedAccountOverdraftMode(accountName, mode) ⇒ <code>Promise</code>
+Set the shared account's overdraft mode
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| accountName | <code>string</code> | 
+| mode | <code>string</code> | 
+
+<a name="PaperCut+setSharedAccountProperties"></a>
+
+### paperCut.setSharedAccountProperties(sharedAccountName, propertyNamesAndValues) ⇒ <code>Promise</code>
+Set multiple shared account properties at once (to save multiple calls).
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| sharedAccountName | <code>string</code> | 
+| propertyNamesAndValues | <code>array</code> | 
+
+<a name="PaperCut+setSharedAccountProperty"></a>
+
+### paperCut.setSharedAccountProperty(sharedAccountName, propertyName, propertyValue) ⇒ <code>Promise</code>
+Sets a shared account property.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| sharedAccountName | <code>string</code> | 
+| propertyName | <code>string</code> | 
+| propertyValue | <code>string</code> | 
+
+<a name="PaperCut+setUserAccountBalance"></a>
+
+### paperCut.setUserAccountBalance(username, balance, comment) ⇒ <code>Promise</code>
+Set the balance on a user's account to a set value.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| username | <code>string</code> | 
+| balance | <code>double</code> | 
+| comment | <code>string</code> | 
+
+<a name="PaperCut+setUserAccountBalance_2"></a>
+
+### paperCut.setUserAccountBalance\_2(username, balance, comment, accountName) ⇒ <code>Promise</code>
+Set the balance on a user's account to a set value.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| username | <code>string</code> | 
+| balance | <code>double</code> | 
+| comment | <code>string</code> | 
+| accountName | <code>string</code> | 
+
+<a name="PaperCut+setUserAccountBalanceByGroup"></a>
+
+### paperCut.setUserAccountBalanceByGroup(group, balance, comment) ⇒ <code>Promise</code>
+Set the balance for each member of a group to the given value.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| group | <code>string</code> | 
+| balance | <code>double</code> | 
+| comment | <code>string</code> | 
+
+<a name="PaperCut+setUserAccountBalanceByGroup_2"></a>
+
+### paperCut.setUserAccountBalanceByGroup\_2(group, balance, comment, accountName) ⇒ <code>Promise</code>
+Set the balance for each member of a group to the given value.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| group | <code>string</code> | 
+| balance | <code>double</code> | 
+| comment | <code>string</code> | 
+| accountName | <code>string</code> | 
+
+<a name="PaperCut+setUserAccountSelectionAdvancedPopup"></a>
+
+### paperCut.setUserAccountSelectionAdvancedPopup(username, allowPersonal, chargeToPersonalWhenSharedSelected, defaultSharedAccount) ⇒ <code>Promise</code>
+Change a user's account selection setting to use the advanced account selection pop-up.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| username | <code>string</code> | 
+| allowPersonal | <code>boolean</code> | 
+| chargeToPersonalWhenSharedSelected | <code>boolean</code> | 
+| defaultSharedAccount | <code>string</code> | 
+
+<a name="PaperCut+setUserAccountSelectionAutoChargePersonal"></a>
+
+### paperCut.setUserAccountSelectionAutoChargePersonal(username, withPopupConfirmation) ⇒ <code>Promise</code>
+Sets the user to auto charge to it's personal account.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| username | <code>string</code> | 
+| withPopupConfirmation | <code>boolean</code> | 
+
+<a name="PaperCut+setUserAccountSelectionAutoSelectSharedAccount"></a>
+
+### paperCut.setUserAccountSelectionAutoSelectSharedAccount(username, accountName, chargeToPersonal) ⇒ <code>Promise</code>
+Change a user's account selection setting to automatically charge to a single shared account.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| username | <code>string</code> | 
+| accountName | <code>string</code> | 
+| chargeToPersonal | <code>boolean</code> | 
+
+<a name="PaperCut+setUserAccountSelectionStandardPopup"></a>
+
+### paperCut.setUserAccountSelectionStandardPopup(username, allowPersonal, allowListSelection, allowPinCode, allowPrintingAsOtherUser, chargeToPersonalWhenSharedSelected, defaultSharedAccount) ⇒ <code>Promise</code>
+Change a user's account selection setting to use the standard account selection pop-up.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| username | <code>string</code> | 
+| allowPersonal | <code>boolean</code> | 
+| allowListSelection | <code>boolean</code> | 
+| allowPinCode | <code>boolean</code> | 
+| allowPrintingAsOtherUser | <code>boolean</code> | 
+| chargeToPersonalWhenSharedSelected | <code>boolean</code> | 
+| defaultSharedAccount | <code>string</code> | 
+
+<a name="PaperCut+setUserOverdraftMode"></a>
+
+### paperCut.setUserOverdraftMode(username, mode) ⇒ <code>Promise</code>
+Set the user's overdraft mode
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| username | <code>string</code> | 
+| mode | <code>string</code> | 
+
+<a name="PaperCut+setUserProperties"></a>
+
+### paperCut.setUserProperties(userName, propertyNamesAndValues) ⇒ <code>Promise</code>
+Set multiple user properties at once (to save multiple calls).
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| userName | <code>string</code> | 
+| propertyNamesAndValues | <code>array</code> | 
+
+<a name="PaperCut+setUserProperty"></a>
+
+### paperCut.setUserProperty(userName, propertyName, propertyValue) ⇒ <code>Promise</code>
+Sets a user property.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with undefined, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| userName | <code>string</code> | 
+| propertyName | <code>string</code> | 
+| propertyValue | <code>string</code> | 
+
+<a name="PaperCut+syncGroup"></a>
+
+### paperCut.syncGroup(groupName) ⇒ <code>Promise</code>
+Syncs an existing group with the configured directory server, updates the group membership.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with boolean, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| groupName | <code>string</code> | 
+
+<a name="PaperCut+useCard"></a>
+
+### paperCut.useCard(userName, cardNumber) ⇒ <code>Promise</code>
+Add the value of the a card to a user's account.
+
+**Kind**: instance method of [<code>PaperCut</code>](#PaperCut)  
+**Returns**: <code>Promise</code> - Resolves with string, rejects on error  
+
+| Param | Type |
+| --- | --- |
+| userName | <code>string</code> | 
+| cardNumber | <code>string</code> | 
+
