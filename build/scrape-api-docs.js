@@ -92,7 +92,7 @@ methods.forEach(e => {
 	];
 	e.parameters.forEach(ee => {
 		if (ee.name === undefined) return;
-		dox.splice(-2, 0, `* @param {${ee.type}} ${ee.name}`);
+		dox.splice(-2, 0, ` * @param {${ee.type}} ${ee.name}`);
 	});
 	fs.appendFileSync(fn, dox.join('\r\n') + '\r\n');
 });
