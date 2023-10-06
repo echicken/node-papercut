@@ -14,8 +14,8 @@
   "author": "Derek Mullin",
   "license": "MIT",
   "devDependencies": {
-    "jsdoc-to-markdown": "^7.1.1",
-    "scrape-it": "^5.3.2"
+    "jsdoc-to-markdown": "^8.0.0",
+    "scrape-it": "^6.0.1"
   },
   "dependencies": {
     "xmlrpc": "^1.3.2"
